@@ -70,13 +70,14 @@ describe('Features', () => {
     });
     page = await browser.newPage();
   })
-  beforeEach(async () => {
+  beforeEach(async (done) => {
     await page.goto('http://localhost:3000')
+    done()
   })
   afterAll(() => {
     browser.close()
   })
-  it('takes a text input as a new todo', async () => {
+  it('takes a text input as a new todo', async (done) => {
     await page.waitForSelector('#todo-submit');
     await page.click("input[id=todo-text]");
     await page.type("input[id=todo-text]", 'a thing I must do');
@@ -86,9 +87,10 @@ describe('Features', () => {
     list = await page.$$eval('li', lis => lis.length)
     expect(listItem).toBe(true)
     expect(list).toBe(1)
+    done()
   });
 
-  it('displays more than one todo item', async () => {
+  it('displays more than one todo item', async (done) => {
     await page.waitForSelector('#todo-submit');
     await page.click("input[id=todo-text]");
     await page.type("input[id=todo-text]", 'a thing I must do');
@@ -99,9 +101,10 @@ describe('Features', () => {
     await page.waitForSelector("#todo-list");
     list = await page.$$eval('li', lis => lis.length)
     expect(list).toBe(2)
-  }) 
+    done()
+  })
 
-  it('removes an item from the list', async () => {
+  it('removes an item from the list', async (done) => {
     await page.waitForSelector('#todo-submit');
     await page.click("input[id=todo-text]");
     await page.type("input[id=todo-text]", 'a thing I must do');
@@ -113,5 +116,6 @@ describe('Features', () => {
     await page.click(".todo-complete");
     list = await page.$$eval('li', lis => lis.length)
     expect(list).toBe(1)
+    done()
   })
 })
