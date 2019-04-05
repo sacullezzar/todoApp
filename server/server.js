@@ -4,10 +4,12 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const PORT = 14000
+const Todo = require ('./routes/routes')
 
 app.use(cors())
-app.use(bodyParser.json())
-app.use('./todos', require('./routes/routes'))
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(Todo)
 
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds231956.mlab.com:31956/todo`, {
     useNewUrlParser: true 

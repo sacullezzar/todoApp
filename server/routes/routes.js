@@ -4,7 +4,6 @@ const todoRoutes = express.Router()
 let Todo = require('../models/todo')
 
 todoRoutes.use((req, res, next) => {
-    console.log('Time:', Date.now())
     next()
 })
 
