@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 let Todo = new Schema({
-    todo_description: {
+    todo_body: {
         type: String
     },
     todo_completed: {
