@@ -19,6 +19,5 @@ connection.once('open', () => {
 })
 
 app.listen(PORT, () => {
-    console.log(process.env.DB_USER, process.env.DB_PASS)
     console.log(`Db server running on Port: ${PORT}`)
 })
