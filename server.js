@@ -7,8 +7,8 @@ app.use(express.static(__dirname + '/dist'))
 console.log('using /dist')
 app.get('*', (req, res) => {
     if(res.statusCode === 200) {
-        console.log('sending file')
-        res.sendFile(path.resolve(__dirname, '/dist/index.html'))
+        console.log('request successful!')
+        res.sendFile(process.cwd()+"/dist/index.html")
     } else {
         console.log(res.json())
     }

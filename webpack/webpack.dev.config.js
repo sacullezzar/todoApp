@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -26,6 +26,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: './dist',
-    hot: true
-  }
+    hot: true,
+    historyApiFallback: true
+  },
 };
