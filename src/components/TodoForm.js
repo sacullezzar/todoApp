@@ -8,7 +8,6 @@ class TodoForm extends Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-
     }
     handleChange (e) {
         this.setState({ value: e.target.value})
@@ -34,3 +33,4 @@ class TodoForm extends Component {
   }
   
   export default TodoForm;
+  
