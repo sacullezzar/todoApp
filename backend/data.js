@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const TodoSchema = new Schema(
     {
         id: String,
-        todo_body: String
+        body: String
     },
     { timestamps: true }
 )

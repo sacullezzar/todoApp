@@ -14,7 +14,7 @@ class ConnectedForm extends Component {
         super()
 
         this.state = {
-            title: ''
+            body: ''
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -27,23 +27,23 @@ class ConnectedForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        const { title } = this.state
+        const { body } = this.state
         const id = uuidv1()
-        this.props.addTodo({ title, id })
-        this.setState({ title: '' })
+        this.props.addTodo({ body, id })
+        this.setState({ body: '' })
     }
 
     render() {
-        const { title } = this.state
+        const { body } = this.state
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form">
-                    <label htmlFor="title">Title</label>
+                    <label htmlFor="title">Todo</label>
                     <input 
                         type="text"
                         className='formControl'
-                        id='title'
-                        value={title}
+                        id='body'
+                        value={body}
                         onChange={this.handleChange}
                     />
                 </div>

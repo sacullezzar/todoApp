@@ -27,10 +27,10 @@ app.use(bodyParser.json())
 app.use(logger("dev"))
 
 router.get('/getTodos', (req, res) => {
-    todo.find((err, data) => {
-        if (err) return res.json({ success: false, error: err})
-        return res.json({ success: true, data: data })
-    })
+    todo.find({})
+        .then(eachTodo => {
+            res.json(eachTodo)
+        })
 })
 
 router.post('/updateTodo', (req, res) => {
@@ -50,20 +50,13 @@ router.delete('/deleteTodo', (req, res) => {
 })
 
 router.post('/addTodo', (req, res) => {
-    let data = new todo()
-    const { id, title } = req.body
-    if((!id && id !== 0) || !title) {
-        return res.json({
-            success: false,
-            error: 'INVALID TODO'
-        })
-    }
-    data.todo_body = title
-    data.id = id
-    data.save(err => {
-        if (err) return res.json({ success: false, error: err})
-        return res.json({ success: true })
+    const { body } = req.body
+    todo.create({
+        body: body
     })
+        .then(todo => {
+            res.json(todo)
+        })
 })
 
 app.use('/api', router)
