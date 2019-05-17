@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 const TodoSchema = new Schema(
     {
-        id: Number,
-        todo: String
+        id: String,
+        todo_body: String
     },
     { timestamps: true }
 )
 
-module.exports = mongoose.model('Data', TodoSchema)
+module.exports = mongoose.model('todo', TodoSchema)

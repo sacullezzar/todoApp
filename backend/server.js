@@ -4,7 +4,7 @@ const express = require('express')
 var cors = require('cors')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
-const Data = require('./Data')
+const todo = require('./Data')
 const API_PORT = 3030
 const app = express()
 app.use(cors())
@@ -27,7 +27,7 @@ app.use(bodyParser.json())
 app.use(logger("dev"))
 
 router.get('/getTodos', (req, res) => {
-    Data.find((err, data) => {
+    todo.find((err, data) => {
         if (err) return res.json({ success: false, error: err})
         return res.json({ success: true, data: data })
     })
@@ -35,7 +35,7 @@ router.get('/getTodos', (req, res) => {
 
 router.post('/updateTodo', (req, res) => {
     const { id, update } = req.body
-    Data.findOneAndUpdate(id, update, err => {
+    todo.findOneAndUpdate(id, update, err => {
         if (err) return res.json({ success: false, error: err})
         return res.json({ success: true })
     })
@@ -43,23 +43,22 @@ router.post('/updateTodo', (req, res) => {
 
 router.delete('/deleteTodo', (req, res) => {
     const { id } = req.body
-    Data.findOneAndDelete(id, err => {
+    todo.findOneAndDelete(id, err => {
         if (err) return res.send(err)
         return res.json({ success: true })
     })
 })
 
 router.post('/addTodo', (req, res) => {
-    let data = new Data()
+    let data = new todo()
     const { id, title } = req.body
-    console.log(title)
     if((!id && id !== 0) || !title) {
         return res.json({
             success: false,
             error: 'INVALID TODO'
         })
     }
-    data.title = title
+    data.todo_body = title
     data.id = id
     data.save(err => {
         if (err) return res.json({ success: false, error: err})
