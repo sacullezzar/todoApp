@@ -2,6 +2,9 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
+  node: {
+    fs: "empty"
+  },
   module: {
     rules: [
         {

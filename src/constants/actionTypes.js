@@ -1,3 +1,2 @@
-export default {
-    TODO_ADDED: 'TODO_ADDED'
-}
+export const ADD_TODO = "ADD_TODO"
+export const TODOS_FETCHED = "TODOS_FETCHED"
