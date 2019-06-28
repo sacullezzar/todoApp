@@ -1,4 +1,9 @@
-import { ADD_TODO, FETCH_TODOS_PENDING, FETCH_TODOS_SUCCESS, FETCH_TODOS_ERROR } from '../constants/actionTypes'
+import { 
+    ADD_TODO,
+    FETCH_TODOS_PENDING,
+    FETCH_TODOS_SUCCESS,
+    FETCH_TODOS_ERROR
+} from '../constants/actionTypes'
 import axios from 'axios'
 
 export function addTodo (payload) {
@@ -55,6 +60,7 @@ export function getAllTodos() {
             if(res.error) {
                 throw(res.error);
             }
+            console.log('returnedRes', res)
             dispatch(fetchAllTodosSuccess(res))
         })
         .catch(error => {

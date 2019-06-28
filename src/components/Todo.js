@@ -1,35 +1,34 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getAllTodos } from '../actions/index'
-import { getAllTodosError, getAllTodosPending } from '../reducers/index'
 
 class Todo extends Component {
   constructor() {
     super()
-  }
-  componentDidMount() {
-    this.props.getAllTodos()
+    this.refreshList = this.refreshList.bind(this)
   }
 
-  showTodos() {
-    console.log(this.props)
-    if (this.props.todos && this.props.todoArray.length) {
-      this.props.todos.todoArray.map((todo) => {
-        return <li key={todo._id}>{todo.body}</li>
-      })
-    }
+  refreshList() {
+    this.props.fetchTodos()
   }
 
   render() {
-    const { pending } = this.props.todos
-    let todoList = this.showTodos()
-
+    const todo = this.props.todos.map((todo) => {
+      if (!todo.completed){
+        return (
+          <div key={todo._id} className='todoItem'>
+            <li>{todo.body}</li>
+            <button onClick={() => this.props.completeTodo(todo, this.refreshList)}>Complete</button>
+          </div>
+        )
+      } else {
+        return null
+      }
+    })
     return (
       <div className="list">
         <h1>Things To Do</h1>
         <React.Fragment>
           <ol>
-          {!pending && todoList}
+          {todo}
           </ol>
         </React.Fragment>
       </div>
@@ -37,16 +36,4 @@ class Todo extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  error: getAllTodosError(state),
-  todos: getAllTodos(state),
-  pending: getAllTodosPending(state)
-})
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAllTodos: todos => dispatch(getAllTodos(todos))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Todo)
+export default Todo

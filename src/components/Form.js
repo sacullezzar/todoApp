@@ -1,15 +1,7 @@
 import React, { Component } from 'react'
 import uuidv1 from 'uuid'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions/index'
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addTodo: todos => dispatch(addTodo(todos))
-    }
-}
-
-class ConnectedForm extends Component {
+class Form extends Component {
     constructor() {
         super()
 
@@ -54,7 +46,5 @@ class ConnectedForm extends Component {
         )
     }
 }
-
-const Form = connect(null, mapDispatchToProps)(ConnectedForm)
 
 export default Form
