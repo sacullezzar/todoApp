@@ -13,6 +13,7 @@ class App extends Component {
         this.getLocation = this.getLocation.bind(this)
         this.addTodo = this.addTodo.bind(this)
         this.fetchTodos = this.fetchTodos.bind(this)
+        this.completeTodo = this.completeTodo.bind(this)
     }
 
     componentDidMount() {
@@ -28,10 +29,15 @@ class App extends Component {
     }
 
     completeTodo(todo) {
-        let params = { todoId: todo._id }
+        let todoId = todo._id
+        let params = { todoId }
         axios.post(`http://localhost:3030/todo/complete`, {
             params
         })
+        const todos = this.state.todos.filter((todo, todoId) => {
+            return todoId !== todo._id
+        })
+        this.setState({ todos })
     }
 
     fetchTodos() {
@@ -67,7 +73,7 @@ class App extends Component {
             <div className="todos">
              <h2 className="title">Todo</h2>
              <Form addTodo={(incoming) => this.addTodo(incoming)} fetchTodos={this.fetchTodos}/>
-             <Todo completeTodo={this.completeTodo} todos={todos} fetchTodos={() => this.fetchTodos()}/>
+             <Todo completeTodo={this.completeTodo.bind(this)} todos={todos} />
              <h2 className="title">About</h2>
              <About location={location} getLocation={this.getLocation}/>
             </div>
